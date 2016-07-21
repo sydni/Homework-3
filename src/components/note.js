@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Draggable from 'react-draggable';
 // import Immutable from 'immutable';
 // import Welcome from './welcome';
 
@@ -8,17 +9,32 @@ class Note extends Component {
   constructor(props) {
     super(props);
 
-    // init component state here
     this.state = {
       isEditing: false,
     };
-    // this.onInputChange = this.onInputChange.bind(this);
-    // ^^ not really sure what this does????
+
+    this.onDelete = this.onDelete.bind(this);
   }
 
-  onChange() {
-
+  onChange(event) {
+    event.preventDefault();
+    this.setState({ text: event.target.value });
+    console.log(event.target.value);
   }
+
+  onSubmit(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.props.createNote(this.state.title);
+    console.log(event.target.value);
+    console.log(`this is state's title: ${this.state.title}`);
+  }
+
+
+  onDelete() {
+    this.props.deleteNote(this.props.id);
+  }
+
 
   rendercheck() {
     if (this.state.isEditing) {
@@ -37,23 +53,41 @@ class Note extends Component {
 
   render() {
     return (
-      <div className="note">
-        <h3 className="header">
-          {this.props.title}
-          <ul id="icons">
-            {this.rendercheck()}
-            <li><i className="fa fa-trash" onClick={this.props.onDelete}></i></li>
-            <li><i className="fa fa-arrows-alt"></i></li>
-          </ul>
-        </h3>
+      <Draggable
+        handle=".note-mover"
+        grid={[25, 25]}
+        defaultPosition={{ x: 20, y: 20 }}
+        position={{ x: this.props.note.x, y: this.props.note.y }}
+        onStart={this.onStartDrag}
+        onDrag={this.onDrag}
+        onStop={this.onStopDrag}
+      >
 
-        <textarea className="textbox" />
-        // <div id="textbox"> // only when
-        // {this.props.text} // if is Editing, put a text area --> make a function
-        // </div>
-      </div>
+        <div className="note">
+          <h3 className="header">
+            <div className="title">
+              {this.props.note.title}
+            </div>
+            <div className="icons">
+              <ul id="icons">
+                {this.rendercheck()}
+                <li><i className="fa fa-trash" onClick={this.onDelete}></i></li>
+                <li><i className="fa fa-arrows-alt"></i></li>
+              </ul>
+            </div>
+          </h3>
+          <div className="textbox">
+            <textarea onChange={this.onChange} />
+          </div>
+        </div>
+
+      </Draggable>
     );
   }
 }
+
+// <div id="textbox"> // only when
+// {this.props.text} // if is Editing, put a text area --> make a function
+// </div>
 
 export default Note;

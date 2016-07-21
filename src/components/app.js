@@ -18,7 +18,6 @@ class App extends Component {
 
     };
     this.onChange = this.onChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.createNote = this.createNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.updateNote = this.updateNote.bind(this);
@@ -32,10 +31,9 @@ class App extends Component {
   createNote(title) {
     this.setState({
       notes: this.state.notes.set(title, { title }),
-
     });
   }
-  //
+
   deleteNote(id) {
     this.setState({
       notes: this.state.notes.delete(id),
@@ -49,31 +47,19 @@ class App extends Component {
   }
 
 
-  handleSubmit(e) {
-    e.preventDefault();
-    const item = { text: this.state.text, id: Date.now() };
-    this.createNote(item);
-    this.setState({ notes: [item, ...this.state.items], text: '' });
-  }
-
-  // add(note) {
-  //   this.setState({
-  //     notes: this.state.notes.set(id, note),
-  //   });
-  // }
-
   render() {
     return (
       <div>
-        <InputBar handleSubmit={this.createNote} />
-        // this note is only showing bc i suck at coding
-        <Note title="hello world" text="this is in app.js" onDelete={this.deleteNote} />
-        {this.state.notes.entrySeq().map(([id, note]) => {
-          return <Note id={id} key={id} note={note} onDelete={(idDelete) => this.deleteNote(idDelete)} />;
-        })}
+        <InputBar createNote={this.createNote} />
+        <div className="noteContainer">
+          {this.state.notes.entrySeq().map(([id, note]) => {
+            return <Note id={id} key={id} note={note} deleteNote={(idDelete) => this.deleteNote(idDelete)} />;
+          })}
+        </div>
       </div>
     );
   }
 }
+
 
 export default App;
