@@ -18,7 +18,9 @@ body {
 
 .note {
   background-color:rgb(255,255,255);
-	display:block;
+	display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 	color: rgb(0,0,0);
   cursor:pointer;
   padding: 0px;
@@ -26,9 +28,30 @@ body {
   height: 10em;
 }
 
+.header {
+  display:flex;
+  align-items: center;
+  width: 15em;
+  height: 2em;
+  padding: 1em;
+  padding-top: 0px;
+}
+
+.icons {
+  display:flex;
+}
+
+.title {
+  display:flex;
+}
 
 ul#icons li {
   display: inline;
-  margin: 0;
-  padding: 0px;
+  //margin: 0;
+  //padding: 0px;
+}
+
+.textbox {
+  display: flex;
+  padding: 5px;
 }

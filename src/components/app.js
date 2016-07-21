@@ -21,7 +21,7 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.createNote = this.createNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
-    // this.updateNote = this.updateNote.bind(this);
+    this.updateNote = this.updateNote.bind(this);
   }
 
   onChange(e) {
@@ -39,6 +39,12 @@ class App extends Component {
   deleteNote(id) {
     this.setState({
       notes: this.state.notes.delete(id),
+    });
+  }
+
+  updateNote(id, fields) {
+    this.setState({
+      notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, fields); }),
     });
   }
 
