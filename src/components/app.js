@@ -49,7 +49,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="cover">
         <InputBar createNote={this.createNote} />
         <div className="noteContainer">
           {this.state.notes.entrySeq().map(([id, note]) => {
