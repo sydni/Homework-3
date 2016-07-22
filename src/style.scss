@@ -21,6 +21,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   align-content: center;
+  align-items: center;
   justify-content: center;
 	color: rgb(0,0,0);
   cursor:pointer;
@@ -37,7 +38,7 @@ body {
   justify-content: space-between;
   width: 15em;
   height: 2em;
-  padding: 1em;
+  padding: 0.5em;
   padding-top: 0px;
 }
 
@@ -93,4 +94,15 @@ ul#icons li {
   flex-direction: row;
   flex-wrap: wrap;
 
+}
+
+.text {
+  display:flex;
+  //align-items: flex-start;;
+  //justify-content: flex-start;;
+  overflow-y: scroll;
+  width: 15em;
+  height: 6em;
+  padding: 1em;
+  padding-top: 0px;
 }

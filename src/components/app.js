@@ -30,7 +30,7 @@ class App extends Component {
 
   createNote(title) {
     this.setState({
-      notes: this.state.notes.set(title, { title }),
+      notes: this.state.notes.set(title, { title, text: '', x: 0, y: 0, zindex: 1 }),
     });
   }
 
@@ -53,7 +53,7 @@ class App extends Component {
         <InputBar createNote={this.createNote} />
         <div className="noteContainer">
           {this.state.notes.entrySeq().map(([id, note]) => {
-            return <Note id={id} key={id} note={note} deleteNote={(idDelete) => this.deleteNote(idDelete)} />;
+            return <Note id={id} key={id} note={note} deleteNote={(idDelete) => this.deleteNote(idDelete)} updateNote={(idUpdate, updatedText) => this.updateNote(idUpdate, updatedText)} />;
           })}
         </div>
       </div>

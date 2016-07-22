@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
+import marked from 'marked';
 // import Immutable from 'immutable';
 // import Welcome from './welcome';
 
@@ -14,21 +15,22 @@ class Note extends Component {
     };
 
     this.onDelete = this.onDelete.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   onChange(event) {
     event.preventDefault();
-    this.setState({ text: event.target.value });
+    this.props.updateNote(this.props.id, { text: event.target.value });
     console.log(event.target.value);
   }
 
-  onSubmit(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.props.createNote(this.state.title);
-    console.log(event.target.value);
-    console.log(`this is state's title: ${this.state.title}`);
-  }
+  // onSubmit(event) {
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  //
+  //   console.log(event.target.value);
+  //   console.log(`this is state's text: ${this.state.text}`);
+  // }
 
 
   onDelete() {
@@ -48,6 +50,27 @@ class Note extends Component {
         this.setState({ isEditing: true });
       }}></i></li>);
     }
+  }
+
+
+  renderedit() {
+    if (this.state.isEditing) {
+      return (
+        <div className="textbox">
+          <textarea value={this.props.note.text} onChange={this.onChange} />
+        </div>
+      );
+    } else {
+      return (
+        <div className="text" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
+
+      );
+      // display the text as a body
+    }
+  }
+
+  onDrag(e, ui) {
+    this.props.updateNote(this.props.id, { x: ui.x, y: ui.y });
   }
 
 
@@ -76,9 +99,7 @@ class Note extends Component {
               </ul>
             </div>
           </h3>
-          <div className="textbox">
-            <textarea onChange={this.onChange} />
-          </div>
+          {this.renderedit()}
         </div>
 
       </Draggable>
@@ -86,8 +107,5 @@ class Note extends Component {
   }
 }
 
-// <div id="textbox"> // only when
-// {this.props.text} // if is Editing, put a text area --> make a function
-// </div>
 
 export default Note;
