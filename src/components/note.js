@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import marked from 'marked';
+import Textarea from 'react-textarea-autosize';
 // import Immutable from 'immutable';
 // import Welcome from './welcome';
 
@@ -12,9 +13,12 @@ class Note extends Component {
 
     this.state = {
       isEditing: false,
+      x: 20,
+      y: 20,
     };
 
     this.onDelete = this.onDelete.bind(this);
+    this.onDrag = this.onDrag.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
@@ -24,17 +28,14 @@ class Note extends Component {
     console.log(event.target.value);
   }
 
-  // onSubmit(event) {
-  //   event.stopPropagation();
-  //   event.preventDefault();
-  //
-  //   console.log(event.target.value);
-  //   console.log(`this is state's text: ${this.state.text}`);
-  // }
-
 
   onDelete() {
     this.props.deleteNote(this.props.id);
+  }
+
+  onDrag(e, ui) {
+    this.setState({ x: ui.x, y: ui.y });
+    this.props.updateNote(this.props.id, { x: this.state.x, y: this.state.y });
   }
 
 
@@ -56,28 +57,22 @@ class Note extends Component {
   renderedit() {
     if (this.state.isEditing) {
       return (
-        <div className="textbox">
-          <textarea value={this.props.note.text} onChange={this.onChange} />
+        <div id="textbox">
+          <Textarea minRows={6} value={this.props.note.text} onChange={this.onChange} />
         </div>
       );
     } else {
       return (
         <div className="text" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
-
       );
-      // display the text as a body
     }
-  }
-
-  onDrag(e, ui) {
-    this.props.updateNote(this.props.id, { x: ui.x, y: ui.y });
   }
 
 
   render() {
     return (
       <Draggable
-        handle=".note-mover"
+        handle=".icons"
         grid={[25, 25]}
         defaultPosition={{ x: 20, y: 20 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}
