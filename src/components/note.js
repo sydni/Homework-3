@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import marked from 'marked';
 import Textarea from 'react-textarea-autosize';
-// import Immutable from 'immutable';
-// import Welcome from './welcome';
 
 
 // example class based component (smart component)
@@ -13,8 +11,6 @@ class Note extends Component {
 
     this.state = {
       isEditing: false,
-      x: 20,
-      y: 20,
     };
 
     this.onDelete = this.onDelete.bind(this);
@@ -34,25 +30,21 @@ class Note extends Component {
   }
 
   onDrag(e, ui) {
-    this.setState({ x: ui.x, y: ui.y });
-    this.props.updateNote(this.props.id, { x: this.state.x, y: this.state.y });
+    this.props.updateNote(this.props.id, { x: ui.x, y: ui.y });
   }
 
 
   rendercheck() {
     if (this.state.isEditing) {
-      return (<li><i className="fa fa-check" onClick={() => {
-        // do other things with the click -> done Editing
+      return (<i className="fa fa-check" onClick={() => {
         this.setState({ isEditing: false });
-      }}></i></li>);
+      }}></i>);
     } else {
-      return (<li><i className="fa fa-pencil" onClick={() => {
-        // do other things
+      return (<i className="fa fa-pencil" onClick={() => {
         this.setState({ isEditing: true });
-      }}></i></li>);
+      }}></i>);
     }
   }
-
 
   renderedit() {
     if (this.state.isEditing) {
@@ -71,9 +63,10 @@ class Note extends Component {
 
   render() {
     return (
+
       <Draggable
         handle=".icons"
-        grid={[25, 25]}
+        grid={[20, 20]}
         defaultPosition={{ x: 20, y: 20 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}
         onStart={this.onStartDrag}
@@ -85,13 +78,11 @@ class Note extends Component {
           <h3 className="header">
             <div className="title">
               {this.props.note.title}
+              {this.rendercheck()}
+              <i className="fa fa-trash" onClick={this.onDelete}></i>
             </div>
             <div className="icons">
-              <ul id="icons">
-                {this.rendercheck()}
-                <li><i className="fa fa-trash" onClick={this.onDelete}></i></li>
-                <li><i className="fa fa-arrows-alt"></i></li>
-              </ul>
+              <i className="fa fa-arrows-alt"></i>
             </div>
           </h3>
           {this.renderedit()}

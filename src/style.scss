@@ -17,57 +17,62 @@ body {
 
 .note {
   background-color:rgb(255,255,255);
-	// display:flex;
-  // flex-direction: row;
-  // flex-wrap: wrap;
-  // align-content: center;
-  // align-items: center;
-  // justify-content: center;
 	color: rgb(0,0,0);
   cursor:pointer;
-  padding: 0.5em;
-  width: 15em;
-  height: 10em;
+  padding: 4%;
+  padding-top: 0;
+  width: 20%;
+  height: 20%;
   box-shadow: 5px 5px 5px gray;
-  margin: 1em;
+  margin: 2%;
+  resize: both;
+  overflow: auto;
+
+  // border: black;
+  // border-style: solid;
 }
+
+
 
 .header {
   display:flex;
   align-items: center;
   justify-content: space-between;
-  width: 12em;
-  height: 2em;
-  padding: 0.5em;
+  overflow-y: scroll;
+  width: 100%;
+  height: 3ex;
+  //padding: 3%;
   padding-top: 0px;
-  margin: 0;
+
+  // border: black;
+  // border-style: solid;
 }
 
 .icons {
-  display:flex;
+//   display:flex;
 }
-
+#icons {
+  //display: inline;
+}
 
 .title {
   display:flex;
 }
 
-ul#icons li {
-  display: inline;
-
-}
 
 #textbox textarea {
-  padding: 1em;
-  width: 20em;
+  padding: 5%;
+  width: 90%;
+  height: 90%
 }
 
 .textbox {
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 1em;
-  width: 12em;
+  padding: 5%;
+  width: 90%;
+  height: 80%
 }
 
 // http://www.bestcssbuttongenerator.com/#/21
@@ -89,6 +94,7 @@ ul#icons li {
 .button:hover {
 	background-color:#bc80ea;
 }
+
 .button:active {
 	position:relative;
 	top:1px;
@@ -100,7 +106,6 @@ ul#icons li {
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-
 }
 
 .text {
@@ -108,8 +113,8 @@ ul#icons li {
   align-items: flex-start;;
   justify-content: flex-start;;
   overflow-y: scroll;
-  width: 15em;
-  height: 6em;
-  padding: 1em;
+  width: 100%;
+  height: 80%;
+  padding: 2%;
   padding-top: 0px;
 }

@@ -6,12 +6,11 @@ class InputBar extends Component {
     super(props);
 
     this.state = { title: '' };
-    // this.onInputChange = this.onInputChange.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
   }
 
-  // add this above your render method
   onInputChange(event) {
     event.preventDefault();
     this.setState({ title: event.target.value });
@@ -23,27 +22,20 @@ class InputBar extends Component {
     event.preventDefault();
     this.props.createNote(this.state.title);
     console.log(event.target.value);
-    console.log(`this is state's title: ${this.state.title}`);
+    this.setState({ title: '' });
+    console.log(event.target.value);
   }
-// <form onSubmit={this.handleSubmit}>
-// <button className="button" onClick={this.handleSubmit}>{'Create'}</button>
 
 
   render() {
     return (
       <div className="inputbar">
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onInputChange} placeholder="enter a note" />
+          <input onChange={this.onInputChange} placeholder="enter a note" value={this.state.title} />
           <button className="button">{'Create'}</button>
         </form>
       </div>
     );
-
-    // return (
-    //   <div>
-    //     <input onChange={this.onInputChange} value={this.state.searchterm} />
-    //   </div>
-    // );
   }
 }
 
