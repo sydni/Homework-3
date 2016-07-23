@@ -16,7 +16,6 @@ body {
 }
 
 .note {
-  //background-color:rgb(255,255,255);
   background-color: transparent;
 	color: rgb(0,0,0);
   cursor:pointer;
@@ -30,9 +29,6 @@ body {
   overflow: auto;
   border: #bc80ea;
   border-style: groove;
-
-  // border: black;
-  // border-style: solid;
 }
 
 
@@ -44,18 +40,12 @@ body {
   overflow-y: scroll;
   width: 100%;
   height: 3ex;
-  //padding: 3%;
   padding-top: 0px;
-
-  // border: black;
-  // border-style: solid;
 }
 
 .icons {
-//   display:flex;
 }
 #icons {
-  //display: inline;
 }
 
 .title {
@@ -70,10 +60,6 @@ body {
 }
 
 .textbox {
-
-  // width: 90%;
-  // height: 80%;
-
   border: black;
   border-style: solid;
   border-width: 5px;

@@ -4,7 +4,6 @@ import marked from 'marked';
 import Textarea from 'react-textarea-autosize';
 
 
-// example class based component (smart component)
 class Note extends Component {
   constructor(props) {
     super(props);

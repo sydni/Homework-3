@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 
-// import Welcome from './welcome';
 import Immutable from 'immutable';
 import InputBar from '../components/input_bar';
 import Note from '../components/note';
 import '../style.scss';
 
 
-// example class based component (smart component)
 class App extends Component {
   constructor(props) {
     super(props);
 
-    // init component state here
     this.state = {
       notes: Immutable.Map(),
 
