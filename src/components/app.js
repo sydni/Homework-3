@@ -5,6 +5,10 @@ import InputBar from '../components/input_bar';
 import Note from '../components/note';
 import '../style.scss';
 
+// at top
+import io from 'socket.io-client';
+const socketserver = 'http://localhost:9090';
+
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +22,12 @@ class App extends Component {
     this.createNote = this.createNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.updateNote = this.updateNote.bind(this);
+
+    this.socket = io(socketserver);
+    this.socket.on('connect', () => { console.log('socket.io connected'); });
+    this.socket.on('disconnect', () => { console.log('socket.io disconnected'); });
+    this.socket.on('reconnect', () => { console.log('socket.io reconnected'); });
+    this.socket.on('error', (error) => { console.log(error); });
   }
 
   onChange(e) {
